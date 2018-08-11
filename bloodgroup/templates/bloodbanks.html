@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{% block pageheader%}
+	blood banks
+{% endblock %}
+{% block content %}
+<div class="table-responsive">
+	<table class="table" id="datatable">
+		<thead>
+			<tr>
+				<th>NAME</th><th>Organization</th><th>bloodgroups</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for obj in objects%}
+			<tr>
+				<td>{{obj.name}}</td>
+				<td>{{obj.organization}}</td>
+				<td>
+					{% for bloodgroup in obj.bloodgroups.all%} {{bloodgroup}},
+					{% endfor%}
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+		
+	</table>
+</div>
+	
+{% endblock %}

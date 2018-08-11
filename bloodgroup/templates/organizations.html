@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+{% block pageheader%}
+	Organizations
+{% endblock %}
+{% block content %}
+<div class="table-responsive">
+	<table class="table" id="datatable">
+		<thead>
+			<tr>
+				<th>NAME</th><th>COUNTRY</th><th>STATE</th><th>CITY</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for obj in objects%}
+			<tr>
+				<td>{{obj.name}}</td>
+				<td>{{obj.country}}</td>
+				<td>{{obj.state}}</td>
+				<td>{{obj.city}}</td>
+				
+			</tr>
+		{% endfor %}
+		</tbody>
+		
+	</table>
+</div>
+	
+{% endblock %}

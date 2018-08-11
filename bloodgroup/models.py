@@ -15,12 +15,16 @@ class Country(models.Model):
 	desc = models.TextField(blank=True)
 	class Meta:
 		db_table="country"
+	def __str__(self):
+		return self.name
 
 class State(NameAbstractModel):
 	country = models.ForeignKey(Country)
 
 	class Meta:
 		db_table="state"
+	def __str__(self):
+		return self.name
 
 class City(NameAbstractModel):
 	pincode = models.IntegerField()
@@ -28,28 +32,25 @@ class City(NameAbstractModel):
 
 	class Meta:
 		db_table = "city"
+	def __str__(self):
+		return self.name
 
 class Organization(models.Model):
 	name = models.CharField(max_length=250)
 	country = models.ForeignKey(Country)
 	state = models.ForeignKey(State)
 	city = models.ForeignKey(City)
+	def __str__(self):
+		return self.name
 
 class BloodGroup(models.Model):
-	bloodgroups = [("ap","A+ve"),
-	("an","A-ve"),
-	("abn","AB-ve"),
-	("abp","AB+ve"),
-	("op","o+ve"),
-	("on","o-ve"),
-	("bp","B+ve"),
-	("bn","B-ve")
-	]
-	name  = models.CharField(max_length=3, choices=bloodgroups)
+	name  = models.CharField(max_length=10)
 
 	def __str__(self):
 		#import pdb; pdb.set_trace()
 		return self.get_name_display()
+	def __str__(self):
+		return self.name
 
 class BloodBank(models.Model):
 	name= models.CharField(max_length=250)
@@ -58,6 +59,8 @@ class BloodBank(models.Model):
 
 	class Meta:
 		db_table="bloodbank"
+	def __str__(self):
+		return self.name
 
 
 class UserProfile(User):

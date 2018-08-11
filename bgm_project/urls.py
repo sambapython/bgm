@@ -1,7 +1,8 @@
 from django.conf.urls import url
 from django.contrib import admin
 from django.views.generic import TemplateView
-from bloodgroup.views import signupview, organizationsview
+from bloodgroup.views import signupview, organizationsview,\
+bloodbanksview, bloodgroupsview
 
 
 urlpatterns = [
@@ -9,5 +10,7 @@ urlpatterns = [
     url(r'^home/', TemplateView.as_view(template_name="base.html")),
     url(r'^signup/', signupview),
     url(r'^organizations/', organizationsview),
+    url(r'^bloodbanks/', bloodbanksview),
+    url(r'^bloodgroups/', bloodgroupsview),
 
 ]
