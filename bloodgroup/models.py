@@ -64,11 +64,16 @@ class BloodBank(models.Model):
 
 
 class UserProfile(User):
+	roles = [
+		("orgadmin","Organization"),
+		("donar","Single User")]
 	
 	bloodgroup = models.ForeignKey(BloodGroup)
 	country = models.ForeignKey(Country)
 	state = models.ForeignKey(State)
 	city = models.ForeignKey(City)
+	role=models.CharField(max_length=25, default="donar",
+		choices=roles)
 
 	class Meta:
 		db_table="userprofile"
