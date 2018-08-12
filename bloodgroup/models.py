@@ -35,14 +35,6 @@ class City(NameAbstractModel):
 	def __str__(self):
 		return self.name
 
-class Organization(models.Model):
-	name = models.CharField(max_length=250)
-	country = models.ForeignKey(Country)
-	state = models.ForeignKey(State)
-	city = models.ForeignKey(City)
-	def __str__(self):
-		return self.name
-
 class BloodGroup(models.Model):
 	name  = models.CharField(max_length=10)
 
@@ -52,15 +44,7 @@ class BloodGroup(models.Model):
 	def __str__(self):
 		return self.name
 
-class BloodBank(models.Model):
-	name= models.CharField(max_length=250)
-	organization = models.ForeignKey(Organization)
-	bloodgroups = models.ManyToManyField(BloodGroup)
 
-	class Meta:
-		db_table="bloodbank"
-	def __str__(self):
-		return self.name
 
 
 class UserProfile(User):
@@ -77,6 +61,24 @@ class UserProfile(User):
 
 	class Meta:
 		db_table="userprofile"
+
+class Organization(models.Model):
+	name = models.CharField(max_length=250)
+	country = models.ForeignKey(Country)
+	state = models.ForeignKey(State)
+	city = models.ForeignKey(City)
+	user = models.ForeignKey(UserProfile, default=1,blank=True,null=True)
+	def __str__(self):
+		return self.name
+class BloodBank(models.Model):
+	name= models.CharField(max_length=250)
+	organization = models.ForeignKey(Organization)
+	bloodgroups = models.ManyToManyField(BloodGroup)
+
+	class Meta:
+		db_table="bloodbank"
+	def __str__(self):
+		return self.name
 
 
 

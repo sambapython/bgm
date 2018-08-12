@@ -1,21 +1,40 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from models import Organization, BloodBank, BloodGroup, City,\
 UserProfile
 from django.core.paginator import Paginator
 from .forms import SignupForm
 from django.contrib.auth import authenticate
+def homeview(request):
+	return render(request,"base.html")
+def signoutview(request):
+	if request.method=="POST":
+		request.session["user"]=None
+		return redirect(homeview)
+	return render(request,"signout.html")
+def manageview(request):
+	return render(request,"manage.html")
 
 def signinview(request):
 	msg=""
+	request.session["user"] = None
 	if request.method=="POST":
 		data = request.POST
 		user = authenticate(username=data.get("username"),
 			password=data.get("password"))
 		if user:
-			msg="login success"
+			user_profiles = UserProfile.objects.filter(user_ptr=user)
+			if user_profiles:
+				user_profile = user_profiles[0]
+
+				request.session["user"]={"username":user.username,
+				"role":user_profile.role,"id":user_profile.id}
+				msg="login success"
+				return redirect(manageview)
+			else:
+				msg="User profile not found for this user"
 		else:
 			msg="login failed"
 	return render(request,"signin.html",{"msg":msg})

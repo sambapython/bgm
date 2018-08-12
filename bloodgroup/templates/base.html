@@ -28,11 +28,19 @@
           <a class="navbar-brand" href="#">BLOOD BANK MANAGEMENT</a>
         </div>
         <ul class="nav navbar-nav">
-          <li><a href="/organizations/">Organizations</a></li>
-          <li><a href="/bloodbanks/">Blood banks</a></li>
-          <li><a href="/bloodgroups/">Blood groups</a></li>
+          <li><a href="/organizations/">ORGANIZATIONS</a></li>
+          <li><a href="/bloodbanks/">BlOOD BANKS</a></li>
+          <li><a href="/bloodgroups/">BlOOD GROUPS</a></li>
+          {% if request.session.user.username %}
+           <li><a href="#"> loged in as {{ request.session.user.username }}</a></li>
+            <li><a href="/signout/">SIGNOUT</a></li>
+            <li><a href="/manage/">MANAGE</a></li>
+           
+          {% else %}
           <li><a href="/signin/">SIGNIN</a></li>
           <li><a href="/signup/">SIGNUP</a></li>
+          {% endif %}
+
         </ul>
       </div>
     </nav> 

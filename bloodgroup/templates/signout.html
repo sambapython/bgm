@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block pageheader %}
+	SIGNOUT
+{% endblock %}
+{% block content %}
+	<form method="post">
+		{% csrf_token%}
+		<input type="submit" name="" value="CONFIRM SIGNOUT">
+	</form>
+{% endblock %}
