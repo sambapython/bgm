@@ -2,16 +2,31 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from models import Organization, BloodBank, BloodGroup, City
+from models import Organization, BloodBank, BloodGroup, City,\
+UserProfile
 from django.core.paginator import Paginator
 from .forms import SignupForm
+from django.contrib.auth import authenticate
+
+def signinview(request):
+	msg=""
+	if request.method=="POST":
+		data = request.POST
+		user = authenticate(username=data.get("username"),
+			password=data.get("password"))
+		if user:
+			msg="login success"
+		else:
+			msg="login failed"
+	return render(request,"signin.html",{"msg":msg})
+
 def signupview(request):
 	form=SignupForm()
 	msg=""
 	if request.method=="POST":
 		user_profile = SignupForm(request.POST)
 		if user_profile.is_valid():
-			user_profile.save()
+			UserProfile.objects.create_user(**user_profile.cleaned_data)
 			msg="user created successfully!!"
 		else:
 			msg=user_profile._errors
