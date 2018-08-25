@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from django.http import HttpResponse
 
 from django.shortcuts import render, redirect
 from models import Organization, BloodBank, BloodGroup, City,\
@@ -7,6 +8,36 @@ UserProfile
 from django.core.paginator import Paginator
 from .forms import SignupForm
 from django.contrib.auth import authenticate
+from django.views.generic import DetailView, UpdateView, CreateView
+class OrgCreateView(CreateView):
+	model = Organization
+	fields="__all__"
+def userorgview(request):
+	pk = request.session['user']['id']
+	user_details=[]
+	org_details=[]
+	bloodbanks=[]
+	try:
+		user_details = UserProfile.objects.get(id=pk)
+		org_details = Organization.objects.get(user__id=pk)
+		bloodbanks = BloodBank.objects.filter(organization=org_details)
+	except Exception as err:
+		print err
+	return render(request,"org_manage.html",
+		{"user_details":user_details,
+		"org_details":org_details,
+		"bloodbanks":bloodbanks
+		}
+		)
+
+class DonarDetailView(DetailView):
+	model = UserProfile
+class DonarUpdateView(UpdateView):
+	model = UserProfile
+	fields = ['bloodgroup','country','state','city','status']
+	success_url="/manage/"
+	#template_name=""
+
 def homeview(request):
 	return render(request,"base.html")
 def signoutview(request):

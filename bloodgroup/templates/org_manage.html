@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+{% block pageheader%}
+	Manage Organization
+{% endblock %}
+{% block content%}
+<h3>{{ msg }}</h3>
+<div class="row">
+	<div class="col-sm-6">
+		<h4>User details</h4>
+		<div class="table-responsive">
+			<table class="table" id="datatable">
+				<tr>
+					<th>NAME</th>
+					<th>bloodgroup</th>
+					<th>operation</th>
+				</tr>
+				<tr>
+					<td>{{user_details.username}}</td>
+					<td>{{user_details.bloodgroup.name}}</td>
+					<td><a href="/donar_update/{{user_details.id}}/">UPDATE</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<h4>Organization details</h4>
+		{% if org_details%}
+			<p>fsdgf</p>
+		{% else %}
+			<p> <a href="/org_create/">create organization</a></p>
+		{% endif%}
+		
+
+	</div>
+</div>
+<div class="row">
+	<h4>blood banks</h4>
+</div>
+{% endblock%}

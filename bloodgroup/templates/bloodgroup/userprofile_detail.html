@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+{% block pageheader%}
+	Donar details
+{% endblock %}
+{% block content%}
+<h3>{{ msg }}</h3>
+<div class="table-responsive">
+	<table class="table" id="datatable">
+		<tr>
+			<th>NAME</th>
+			<th>bloodgroup</th>
+			<th>operation</th>
+		</tr>
+		<tr>
+			<td>{{object.username}}</td>
+			<td>{{object.bloodgroup.name}}</td>
+			<td><a href="/donar_update/{{object.id}}/">UPDATE</a>
+			</td>
+		</tr>
+	</table>
+</div>
+{% endblock%}

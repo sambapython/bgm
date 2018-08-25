@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+{% block pageheader%}
+	Donar Update
+{% endblock %}
+{% block content%}
+<h3>{{ msg }}</h3>
+<form method="post">
+	{% csrf_token %}
+	{{ form.as_p }}
+<input type="submit" value="UPDATE">
+</form>
+{% endblock%}

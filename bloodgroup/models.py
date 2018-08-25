@@ -56,6 +56,7 @@ class UserProfile(User):
 	country = models.ForeignKey(Country)
 	state = models.ForeignKey(State)
 	city = models.ForeignKey(City)
+	status = models.BooleanField(default=True)
 	role=models.CharField(max_length=25, default="donar",
 		choices=roles)
 
@@ -67,7 +68,7 @@ class Organization(models.Model):
 	country = models.ForeignKey(Country)
 	state = models.ForeignKey(State)
 	city = models.ForeignKey(City)
-	user = models.ForeignKey(UserProfile, default=1,blank=True,null=True)
+	user = models.OneToOneField(UserProfile, default=1,blank=True,null=True)
 	def __str__(self):
 		return self.name
 class BloodBank(models.Model):

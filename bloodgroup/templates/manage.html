@@ -6,7 +6,7 @@
 	{% ifequal request.session.user.role 'donar'%}
 		<a href="/donar/{{request.session.user.id}}">Get my detals</a>
 	{%else%}
-	    <a href="/userorgs/{{request.session.user.id}}">Get my organization detals</a>
+	    <a href="/userorgs/">Get my organization detals</a>
 
 	{% endifequal %}
 	
