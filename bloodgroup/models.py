@@ -68,7 +68,7 @@ class Organization(models.Model):
 	country = models.ForeignKey(Country)
 	state = models.ForeignKey(State)
 	city = models.ForeignKey(City)
-	user = models.OneToOneField(UserProfile, default=1,blank=True,null=True)
+	user = models.OneToOneField(UserProfile, blank=True,null=True)
 	def __str__(self):
 		return self.name
 class BloodBank(models.Model):

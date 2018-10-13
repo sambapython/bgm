@@ -5,7 +5,7 @@
 {% block content%}
 <h3>{{ msg }}</h3>
 <div class="row">
-	<div class="col-sm-6">
+	<div class="col-sm-4">
 		<h4>User details</h4>
 		<div class="table-responsive">
 			<table class="table" id="datatable">
@@ -23,18 +23,58 @@
 			</table>
 		</div>
 	</div>
-	<div class="col-sm-6">
+	<div class="col-sm-4">
 		<h4>Organization details</h4>
 		{% if org_details%}
-			<p>fsdgf</p>
+		<div class="table-responsive">
+			<table class="table" id="datatable">
+				<tr>
+					<td>Name</td>
+					<td>state</td>
+					<td>city</td>
+					<td>Country</td>
+					<td>Operation</td>
+				</tr>
+				<tr><td>{{ org_details.name}}</td>
+					<td>{{ org_details.state}}</td>
+					<td>{{ org_details.city}}</td>
+					<td>{{ org_details.country}}</td>
+					<td><a href="/org_update/{{org_details.id}}/">Update</a></td>
+				</tr>
+			</table>
+		</div>
 		{% else %}
 			<p> <a href="/org_create/">create organization</a></p>
 		{% endif%}
-		
-
+	</div>
+	<div class="col-sm-4">
+			<h4> blood banks</h4>
+			<h5><a href="/bloodbank_create/">Create bloodbank</a></h5>
+			<div class="table-responsive">
+				<table class="table" id="datatable">
+					<tr>
+						<th>Name</th>
+						<th>Bloodgroups</th>
+						<th>Operations</th>
+					</tr>
+					{% for bank in bloodbanks%}
+					<tr>
+						<td>{{ bank.name }}</td>
+						<td>
+							{% for group in bank.bloodgroups.all %}
+							{{ group.name}},
+						{% endfor%}
+						</td>
+						<td><a href="/bank_update/{{bank.id}}/">Update</a>
+							<a href="/bank_delete/{{bank.id}}/">Delete</a>
+						</td>
+						
+					</tr>
+					{% endfor %}
+				</table>
+				
+			</div>
 	</div>
 </div>
-<div class="row">
-	<h4>blood banks</h4>
-</div>
+
 {% endblock%}

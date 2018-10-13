@@ -1,0 +1,10 @@
+{% extends 'base.html'%}
+{% block pageheader%}
+	blood bank creation
+{% endblock %}
+{% block content%}
+	<form method="post">
+		{% csrf_token %}
+		<input type="submit" value="confirm delete">
+	</form>
+{% endblock %} 
